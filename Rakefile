@@ -19,7 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.license = "MIT"
   gem.summary = %Q{YoolinkPro API Ruby SDK}
   gem.description = %Q{YoolinkPro API Ruby SDK, manage your feed, users, groups, teams...}
-  gem.email = "vincent.durand@madwork.org"
+  gem.email = "vincent@yoolink.fr"
   gem.authors = ["Vincent Durand"]
   # dependencies defined in Gemfile
 end
