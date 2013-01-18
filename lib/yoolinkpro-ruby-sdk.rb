@@ -7,7 +7,7 @@ require 'yoolinkpro/exceptions'
 module Yoolinkpro
   extend self
   
-  API_SERVER  = "api.pro.dev.yoolink.fr"
+  API_SERVER  = "api.yoolinkpro.com"
   API_VERSION = 1
   
   attr_accessor :public_key, :private_key, :admin_key
