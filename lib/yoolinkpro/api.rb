@@ -18,19 +18,24 @@ module Yoolinkpro
     end
     
     def method_missing(method, *args)
+      id, params, scope = args[0], args[1], args[2]
       case method.to_s
       when /^get_(\w+)_by_id$/
-        build_uri("/#{$1}/#{args.first}.json")
-        build_key(:get, args.last[:as])
+        build_uri("/#{$1}/#{id}.json")
+        build_key(:get, scope)
         RestClient.get @uri.to_s, http_headers
       when /^get_(\w+)$/
         build_uri("/#{$1}.json")
-        build_key(:get, args.last[:as])
+        build_key(:get, scope)
         RestClient.get @uri.to_s, http_headers
+      when /^update_(\w+)$/
+        build_uri("/#{$1}/#{id}.json", :query => params.to_query)
+        build_key(:put, scope, params)
+        RestClient.put @uri.to_s, params.to_query, http_headers
       when /^create_(\w+)$/
-        build_uri("/#{$1}.json", :query => args.first.to_query)
-        build_key(:post, args.last[:as], args.first)
-        RestClient.post @uri.to_s, args.first.to_query, http_headers
+        build_uri("/#{$1}.json", :query => params.to_query)
+        build_key(:post, scope, params)
+        RestClient.post @uri.to_s, params.to_query, http_headers
       else
         super
       end
