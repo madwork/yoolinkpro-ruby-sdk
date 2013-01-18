@@ -1,6 +1,8 @@
 require 'rest_client'
 require 'oj'
 require 'active_support/core_ext'
+require 'hash_ext'
+require 'yoolinkpro/exceptions'
 
 module Yoolinkpro
   extend self

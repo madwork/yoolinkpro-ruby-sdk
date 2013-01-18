@@ -9,6 +9,7 @@ module Yoolinkpro
       super
       @millitime = Time.now.to_i*1000
       @int = rand(100000)
+      @key_scopes = { :private => private_key, :admin => admin_key }
     end
     
     def open_session(email)
@@ -16,16 +17,21 @@ module Yoolinkpro
       RestClient::Response.create "https://#{Yoolinkpro::API_SERVER}/open_session?email=#{CGI.escape(email)}&X-YP-AppKey=#{public_key}&X-YP-Signature=#{CGI.escape(signature)}&X-YP-MilliTime=#{@millitime}&X-YP-Int=#{@int}".to_json, nil, nil
     end
     
-    def user(id)
-      build_uri("/user/#{id}.json")
-      build_key("get")
-      RestClient.get @uri.to_s, http_headers
-    end
-    
-    def users
-      build_uri("/users.json")
-      build_key("get")
-      RestClient.get @uri.to_s, http_headers
+    def method_missing(method, *args)
+      case method.to_s
+      when /^get_(\w+)_by_id$/
+        build_uri("/#{$1}/#{args.first}.json")
+        build_key(:get, args.last[:as])
+        RestClient.get @uri.to_s, http_headers
+      when /^get_(\w+)$/
+        build_uri("/#{$1}.json")
+        build_key(:get, args.last[:as])
+        RestClient.get @uri.to_s, http_headers
+      when /^create_(\w+)$/
+        build_uri("/#{$1}.json", :query => args.first.to_query)
+        build_key(:post, args.last[:as], args.first)
+        RestClient.post @uri.to_s, args.first.to_query, http_headers
+      end
     end
     
     private
@@ -44,12 +50,12 @@ module Yoolinkpro
       Base64.encode64(Digest::SHA1.digest(@key)).gsub(/=$/, '')
     end
     
-    def build_uri(path)
-      @uri = URI::HTTP.build({ :host => Yoolinkpro::API_SERVER, :path => path })
+    def build_uri(path, options = {})
+      @uri = URI::HTTP.build({ :host => Yoolinkpro::API_SERVER, :path => path }.merge(options))
     end
     
-    def build_key(http_method)
-      @key = "#{http_method}#{@uri.path}#{private_key}#{@millitime}#{@int}"
+    def build_key(http_method, scope, params = {})
+      @key = "#{http_method}#{@uri.path}#{params.to_key}#{@key_scopes[scope] || private_key}#{@millitime}#{@int}"
     end
     
   end
