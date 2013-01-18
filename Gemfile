@@ -5,7 +5,7 @@ source "http://rubygems.org"
 
 gem 'rest-client', '~> 1.6.7'
 gem 'oj', '~> 2.0.1'
-gem 'activesupport', '~> 3.2.11', :lib => 'active_support'
+gem 'activesupport', '~> 3.2.11'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
