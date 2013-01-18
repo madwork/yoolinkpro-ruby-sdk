@@ -31,6 +31,8 @@ module Yoolinkpro
         build_uri("/#{$1}.json", :query => args.first.to_query)
         build_key(:post, args.last[:as], args.first)
         RestClient.post @uri.to_s, args.first.to_query, http_headers
+      else
+        super
       end
     end
     
