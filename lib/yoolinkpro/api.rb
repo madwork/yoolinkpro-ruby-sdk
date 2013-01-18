@@ -58,7 +58,7 @@ module Yoolinkpro
     end
     
     def build_uri(path, options = {})
-      @uri = URI::HTTP.build({ :host => Yoolinkpro::API_SERVER, :path => path }.merge(options))
+      @uri = URI::HTTPS.build({ :host => Yoolinkpro::API_SERVER, :path => path }.merge(options))
     end
     
     def build_key(http_method, scope, params = {})
