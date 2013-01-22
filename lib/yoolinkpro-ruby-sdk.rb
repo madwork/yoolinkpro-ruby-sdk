@@ -14,11 +14,11 @@ module Yoolinkpro
   
   # config/initializers/load_yoolinkpro.rb (for rails)
   #
-  # Yoolinkpro.configure do |config|
-  #   config.public_key  = 'public_key'
-  #   config.private_key = 'private_key'
-  #   config.admin_key   = 'admin_key'
-  # end
+  #   Yoolinkpro.configure do |config|
+  #     config.public_key  = 'public_key'
+  #     config.private_key = 'private_key'
+  #     config.admin_key   = 'admin_key'
+  #   end
   def configure
     yield self
   end
