@@ -27,7 +27,7 @@ module Yoolinkpro
     # @param [String] password
     # @return [RestClient::Response]
     def authenticate(email, password)
-      params = { :email => email, :password => Base64.encode64(crypted_password(password)) }
+      params = { :email => email, :password => Base64.strict_encode64(crypted_password(password)) }
       build_uri("/user/authenticate.json", :query => params.to_query)
       build_key(:post, private_key, params)
       RestClient.post @uri.to_s, params.to_query, http_headers
@@ -144,7 +144,7 @@ module Yoolinkpro
     end
     
     def signature
-      Base64.encode64(Digest::SHA1.digest(@key)).gsub(/=$/, '')
+      Base64.strict_encode64(Digest::SHA1.digest(@key)).gsub(/=$/, '')
     end
     
     def build_uri(path, options = {})
