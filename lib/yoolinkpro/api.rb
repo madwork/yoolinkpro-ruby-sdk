@@ -36,6 +36,10 @@ module Yoolinkpro
         build_uri("/#{$1}.json", :query => params.to_query)
         build_key(:post, scope, params)
         RestClient.post @uri.to_s, params.to_query, http_headers
+      when /^search_(\w+)$/
+        build_uri("/#{$1}/search.json", :query => params.to_query)
+        build_key(:get, scope, params)
+        RestClient.get @uri.to_s, params.to_query, http_headers
       else
         super
       end
