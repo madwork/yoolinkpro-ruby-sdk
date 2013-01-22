@@ -18,6 +18,20 @@ module Yoolinkpro
       @int = rand(100000)
       @key_scopes = { :private => private_key, :admin => admin_key }
     end
+
+    # User authentication
+    #
+    #   api.authenticate "vincent@yoolink.fr", "password"
+    #
+    # @param [String] email
+    # @param [String] password
+    # @return [RestClient::Response]
+    def authenticate(email, password)
+      params = { :email => email, :password => Base64.encode64(crypted_password(password)) }
+      build_uri("/user/authenticate.json", :query => params.to_query)
+      build_key(:post, private_key, params)
+      RestClient.post @uri.to_s, params.to_query, http_headers
+    end
     
     # Create an url to open a new session
     #
@@ -33,6 +47,7 @@ module Yoolinkpro
     # Find object such as user, team, link
     #
     #   api.find :user, 1
+    #   api.find :team, 1234
     #
     # @param [Symbol] obj
     # @param [Fixnum] id
@@ -44,7 +59,21 @@ module Yoolinkpro
       RestClient.get @uri.to_s, http_headers
     end
 
-    # Search object such as :user, :team, :link
+    # Find all object such as users, teams, groups
+    #
+    #   api.find_all :users
+    #   api.find_all :groups
+    #
+    # @param [Symbol] obj pluralize
+    # @param [Symbol] scope for this request
+    # @return [RestClient::Response]
+    def find_all(obj, scope = :admin)
+      build_uri("/#{obj}.json")
+      build_key(:get, scope)
+      RestClient.get @uri.to_s, http_headers
+    end
+
+    # Search object such as :user
     #
     #   api.search :user, :email => "vincent@yoolink.fr"
     #
@@ -58,7 +87,7 @@ module Yoolinkpro
       RestClient.get @uri.to_s, http_headers
     end
 
-    # Create object such as :user, :team, :link
+    # Create object such as :user, :team, :link, :comment
     #
     #   api.create :group, :name => "Api", :description => "Everything about Api"
     #
@@ -72,9 +101,9 @@ module Yoolinkpro
       RestClient.post @uri.to_s, params.to_query, http_headers
     end
 
-    # Update object such as :user, :team, :link
+    # Update object such as :user, :link
     #
-    #   api.update :group, 1, :description => "Everything about Api and more..."
+    #   api.update :user, 1, :firstname => "Vincent"
     #
     # @param [Symbol] obj
     # @param [Fixnum] id
@@ -85,6 +114,21 @@ module Yoolinkpro
       build_uri("/#{obj}/#{id}.json", :query => params.to_query)
       build_key(:put, scope, params)
       RestClient.put @uri.to_s, params.to_query, http_headers
+    end
+
+    # Delete object
+    #
+    #   api.delete :comment, 1, { :identity_token => auth[:identity_token] } :private
+    #
+    # @param [Symbol] obj
+    # @param [Fixnum] id
+    # @param [Hash] params
+    # @param [Symbol] scope for this request
+    # @return [RestClient::Response]
+    def delete(obj, id, params = {}, scope = :admin)
+      build_uri("/#{obj}/#{id}.json", :query => params.to_query)
+      build_key(:delete, scope, params)
+      RestClient.delete @uri.to_s, http_headers
     end
     
     private
@@ -109,6 +153,12 @@ module Yoolinkpro
     
     def build_key(http_method, scope, params = {})
       @key = "#{http_method}#{@uri.path}#{params.to_key}#{@key_scopes[scope] || private_key}#{@millitime}#{@int}"
+    end
+
+    def crypted_password(password)
+      cipher = OpenSSL::Cipher::Cipher.new('bf-ecb').encrypt
+      cipher.key = Digest::SHA256.digest(private_key)
+      cipher.update(password) << cipher.final
     end
     
   end
