@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{yoolinkpro-ruby-sdk}
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Vincent Durand"]
-  s.date = %q{2013-01-18}
+  s.date = %q{2013-01-22}
   s.description = %q{YoolinkPro API Ruby SDK, manage your feed, users, groups, teams...}
   s.email = %q{vincent@yoolink.fr}
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     ".rvmrc",
     "Gemfile",
     "Gemfile.lock",
+    "Guardfile",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
@@ -31,8 +32,10 @@ Gem::Specification.new do |s|
     "lib/yoolinkpro/api.rb",
     "lib/yoolinkpro/client.rb",
     "lib/yoolinkpro/exceptions.rb",
+    "spec/hash_ext_spec.rb",
     "spec/spec_helper.rb",
-    "spec/yoolinkpro-ruby-sdk_spec.rb"
+    "spec/yoolinkpro-ruby-sdk_spec.rb",
+    "yoolinkpro-ruby-sdk.gemspec"
   ]
   s.homepage = %q{http://github.com/madwork/yoolinkpro-ruby-sdk}
   s.licenses = ["MIT"]
@@ -50,6 +53,10 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<yard>, ["~> 0.7"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_development_dependency(%q<guard>, ["~> 1.6.1"])
+      s.add_development_dependency(%q<guard-bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<guard-rspec>, ["~> 1.2.1"])
+      s.add_development_dependency(%q<rb-inotify>, ["~> 0.8.8"])
     else
       s.add_dependency(%q<rest-client>, ["~> 1.6.7"])
       s.add_dependency(%q<oj>, ["~> 2.0.1"])
@@ -57,6 +64,10 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<yard>, ["~> 0.7"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+      s.add_dependency(%q<guard>, ["~> 1.6.1"])
+      s.add_dependency(%q<guard-bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<guard-rspec>, ["~> 1.2.1"])
+      s.add_dependency(%q<rb-inotify>, ["~> 0.8.8"])
     end
   else
     s.add_dependency(%q<rest-client>, ["~> 1.6.7"])
@@ -65,6 +76,10 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<yard>, ["~> 0.7"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.4"])
+    s.add_dependency(%q<guard>, ["~> 1.6.1"])
+    s.add_dependency(%q<guard-bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<guard-rspec>, ["~> 1.2.1"])
+    s.add_dependency(%q<rb-inotify>, ["~> 0.8.8"])
   end
 end
 
