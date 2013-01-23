@@ -19,7 +19,7 @@ module Yoolinkpro
       @int = rand(100000)
       @key_scopes = { :private => private_key, :admin => admin_key }
 
-      self.oj_options ||= { :symbol_keys => true }  # set symbol as key by default, symbol are so cool!
+      self.oj_options ||= { :symbol_keys => true }  # set key as symbol by default, symbol are so cool!
     end
 
     def get(method, *args)
