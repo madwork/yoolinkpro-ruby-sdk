@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{yoolinkpro-ruby-sdk}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Vincent Durand"]
-  s.date = %q{2013-01-22}
+  s.date = %q{2013-01-23}
   s.description = %q{YoolinkPro API Ruby SDK, manage your feed, users, groups, teams...}
   s.email = %q{vincent@yoolink.fr}
   s.extra_rdoc_files = [
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
     "lib/yoolinkpro/api.rb",
     "lib/yoolinkpro/client.rb",
     "lib/yoolinkpro/exceptions.rb",
+    "lib/yoolinkpro/request.rb",
     "spec/hash_ext_spec.rb",
     "spec/spec_helper.rb",
     "spec/yoolinkpro-ruby-sdk_spec.rb",
