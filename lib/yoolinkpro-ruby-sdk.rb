@@ -23,6 +23,7 @@ module Yoolinkpro
     yield self
   end
   
-  autoload :Client, 'yoolinkpro/client'
-  autoload :Api,    'yoolinkpro/api'
+  autoload :Client,  'yoolinkpro/client'
+  autoload :Request, 'yoolinkpro/request'
+  autoload :Api,     'yoolinkpro/api'
 end
