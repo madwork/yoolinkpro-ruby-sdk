@@ -59,7 +59,7 @@ module Yoolinkpro
     #   api.search :user, :email => "vincent@yoolink.fr"
     #
     # @param [Symbol] obj
-    # @param [Fixnum] params
+    # @param [Hash] params
     # @param [Symbol] scope for this request
     # @return [RestClient::Response]
     def search(obj, params = {}, scope = :private)
@@ -99,7 +99,7 @@ module Yoolinkpro
 
     # Delete object
     #
-    #   api.delete :comment, 1, { :identity_token => auth[:identity_token] } :private
+    #   api.delete :comment, 1, { :identity_token => auth[:identity_token] }, :private
     #
     # @param [Symbol] obj
     # @param [Fixnum] id
