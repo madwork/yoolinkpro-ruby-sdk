@@ -29,6 +29,8 @@ module Yoolinkpro
       end
     rescue RestClient::Exception => ex
       raise ApiException, ex.message
+    rescue Oj::ParseError
+      raise ApiException, "Invalid API Response"
     end
     
     private
