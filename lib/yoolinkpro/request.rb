@@ -22,9 +22,9 @@ module Yoolinkpro
       self.oj_options ||= { :symbol_keys => true }  # set key as symbol by default, symbol are so cool!
     end
 
-    def get(method, *args)
+    def get(meth, *args)
       @response ||= begin
-        http_response = send(method, *args)
+        http_response = send(meth, *args)
         Oj.load(http_response.body, oj_options)
       end
     rescue RestClient::Exception => ex

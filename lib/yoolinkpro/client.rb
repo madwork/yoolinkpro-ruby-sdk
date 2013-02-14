@@ -29,9 +29,9 @@ module Yoolinkpro
       @public_key, @private_key, @admin_key = public_key, private_key, admin_key
     end
     
-    def method_missing(method, *args)
+    def method_missing(meth, *args)
       request = Yoolinkpro::Request.new(self)
-      request.get(method, *args)
+      request.get(meth, *args)
     end
     
   end
