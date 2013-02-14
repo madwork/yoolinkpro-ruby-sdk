@@ -1,6 +1,6 @@
 # Yoolinkpro Ruby SDK
 
-Ruby Gem for [YoolinkPro API](http://api.yoolinkpro.com) - [YoolinkPro](http://www.yoolinkpro.com)
+Ruby Gem for [YoolinkPro API](https://api.yoolinkpro.com) - [YoolinkPro](https://www.yoolinkpro.com)
 
 Manage your feed, users, groups, teams... was never so easy!
 
@@ -22,30 +22,30 @@ Or install it yourself as:
 
 * Instantiate a happy client
 
-    client = Yoolinkpro::Client.new 'public_key', 'private_key', 'admin_key'
+      client = Yoolinkpro::Client.new 'public_key', 'private_key', 'admin_key'
 
 * Retrieve user, team, group by id...
 
-    client.find :user, 1
-    client.find :group, 1
+      client.find :user, 1
+      client.find :group, 1
 
 * Search user by email
 
-    client.search :user, email: "vincent@foo.io"
+      client.search :user, email: "vincent@foo.io"
 
 * Retrieve users, teams, groups...
 
-    client.find_all :users
-    client.find_all :groups
+      client.find_all :users
+      client.find_all :groups
 
 * Create a shiny new user, team, group
 
-    client.create :user, { lastname: "Durand", firstname: "Vincent", email: "vincent@foo.io" }
-    client.create :group, { name: "Api", description: "YoolinkPro Api", category: "Yoolinkpro" }
+      client.create :user, { lastname: "Durand", firstname: "Vincent", email: "vincent@foo.io" }
+      client.create :group, { name: "Api", description: "YoolinkPro Api", category: "Yoolinkpro" }
 
 * Update our previous user
 
-  client.update :user, 1, { firstname: "John" }
+      client.update :user, 1, { firstname: "John" }
 
 ## Configuration for Ruby on Rails
 
