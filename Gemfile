@@ -12,5 +12,5 @@ group :development do
   gem 'guard', '~> 1.6.2'
   gem 'guard-bundler', '~> 1.0.0'
   gem 'guard-rspec', '~> 2.4.0'
-  gem 'rb-inotify', '~> 0.9.0'
+  gem 'rb-inotify', '~> 0.8.8'
 end
