@@ -31,11 +31,11 @@ module Yoolinkpro
     #   api.find :team, 1234
     #
     # @param [Symbol] obj
-    # @param [Fixnum] id
+    # @param [Fixnum] obj_id
     # @param [Symbol] scope for this request
     # @return [RestClient::Response]
-    def find(obj, id, scope = :private)
-      build_uri("/#{obj}/#{id}.json")
+    def find(obj, obj_id, scope = :private)
+      build_uri("/#{obj}/#{obj_id}.json")
       build_key(:get, scope)
       RestClient.get @uri.to_s, http_headers
     end
@@ -87,12 +87,12 @@ module Yoolinkpro
     #   api.update :user, 1, :firstname => "Vincent"
     #
     # @param [Symbol] obj
-    # @param [Fixnum] id
+    # @param [Fixnum] obj_id
     # @param [Hash] params
     # @param [Symbol] scope for this request
     # @return [RestClient::Response]
-    def update(obj, id, params = {}, scope = :admin)
-      build_uri("/#{obj}/#{id}.json", :query => params.to_query)
+    def update(obj, obj_id, params = {}, scope = :admin)
+      build_uri("/#{obj}/#{obj_id}.json", :query => params.to_query)
       build_key(:put, scope, params)
       RestClient.put @uri.to_s, params.to_query, http_headers
     end
@@ -102,12 +102,12 @@ module Yoolinkpro
     #   api.delete :comment, 1, { :identity_token => auth[:identity_token] }, :private
     #
     # @param [Symbol] obj
-    # @param [Fixnum] id
+    # @param [Fixnum] obj_id
     # @param [Hash] params
     # @param [Symbol] scope for this request
     # @return [RestClient::Response]
-    def delete(obj, id, params = {}, scope = :admin)
-      build_uri("/#{obj}/#{id}.json", :query => params.to_query)
+    def delete(obj, obj_id, params = {}, scope = :admin)
+      build_uri("/#{obj}/#{obj_id}.json", :query => params.to_query)
       build_key(:delete, scope, params)
       RestClient.delete @uri.to_s, http_headers
     end
