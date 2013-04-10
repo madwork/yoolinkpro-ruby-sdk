@@ -111,5 +111,13 @@ module Yoolinkpro
       build_key(:delete, scope, params)
       RestClient.delete @uri.to_s, http_headers
     end
+
+    def execute(path, meth, params = {}, scope = :admin)
+      payload = params.dup
+      params.delete(:photo_data)
+      build_uri(path, :query => params.to_query)
+      build_key(meth, scope, params)
+      RestClient::Request.execute method: meth, url: @uri.to_s, headers: http_headers, payload: payload
+    end
   end
 end
